@@ -1,0 +1,8 @@
+select(tabla
+select[id](tabla)
+project(tabla)
+a = select[a=1(t)
+union(a)
+fulljoin(a,select(dept))
+asignacion_invalida = id, nota, select[algo='cosa'](tabla)
+select[id='mal escrito\'](persona)

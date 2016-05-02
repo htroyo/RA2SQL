@@ -1,0 +1,11 @@
+select(tabla)
+project[id,nombre,telefono](contacto)
+project[carnet,nombre](select[nota>90](estudiante))
+a = select[salario>500000&departamento=5|departamento=2](emp)
+b = select(dept)
+naturaljoin(a,b)
+thetajoin[id=num](a,b)
+tabla_3 = leftjoin[a.salario < b.salario](a,b)
+campos = salario, nombre, apellido,		departamento
+project[campos](except(a,tabla_3))
+intersect(select[campo='string con \r\ncaracteres especiales\\'](tabla3),notas)

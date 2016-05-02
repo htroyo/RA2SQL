@@ -1,0 +1,1094 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> exp
+Rule 1     exp -> unexp
+Rule 2     exp -> biexp
+Rule 3     exp -> asign
+Rule 4     asign -> ID IGUAL unexp
+Rule 5     asign -> ID IGUAL biexp
+Rule 6     asign -> ID IGUAL campos
+Rule 7     unexp -> op_select PAREN arg RPARAM
+Rule 8     unexp -> PROJECT PARENC campos RPARAMC PAREN arg RPARAM
+Rule 9     campos -> ID COMA campos
+Rule 10    campos -> ID
+Rule 11    arg -> ID
+Rule 12    arg -> unexp
+Rule 13    arg -> biexp
+Rule 14    op_select -> SELECT op_select_opc
+Rule 15    op_select_opc -> PARENC condicion RPARAMC
+Rule 16    op_select_opc -> <empty>
+Rule 17    condicion -> PAREN condicion RPARAM
+Rule 18    condicion -> condicion OP_LOGICO condicion
+Rule 19    condicion -> op_condicion
+Rule 20    condicion -> OP_NOT PAREN condicion RPARAM
+Rule 21    op_condicion -> cond_exp OP_COMPARACION cond_exp
+Rule 22    op_condicion -> cond_exp IGUAL cond_exp
+Rule 23    cond_exp -> PAREN cond_exp RPARAM
+Rule 24    cond_exp -> cond_exp OP_ARITMETICO cond_exp
+Rule 25    cond_exp -> ID
+Rule 26    cond_exp -> NUM
+Rule 27    cond_exp -> STRING
+Rule 28    cond_exp -> ID PUNTO ID
+Rule 29    biexp -> op_binario PAREN arg COMA arg RPARAM
+Rule 30    op_binario -> op_join_arg
+Rule 31    op_binario -> binario
+Rule 32    op_join_arg -> join_func PARENC condicion RPARAMC
+Rule 33    join_func -> TJOIN
+Rule 34    join_func -> LJOIN
+Rule 35    join_func -> RJOIN
+Rule 36    join_func -> FJOIN
+Rule 37    binario -> NJOIN
+Rule 38    binario -> UNION
+Rule 39    binario -> INTERSECT
+Rule 40    binario -> EXCEPT
+
+Terminals, with rules where they appear
+
+COMA                 : 9 29
+EXCEPT               : 40
+FJOIN                : 36
+ID                   : 4 5 6 9 10 11 25 28 28
+IGUAL                : 4 5 6 22
+INTERSECT            : 39
+LJOIN                : 34
+NJOIN                : 37
+NUM                  : 26
+OP_ARITMETICO        : 24
+OP_COMPARACION       : 21
+OP_LOGICO            : 18
+OP_NOT               : 20
+PAREN                : 7 8 17 20 23 29
+PARENC               : 8 15 32
+PROJECT              : 8
+PUNTO                : 28
+RJOIN                : 35
+RPARAM               : 7 8 17 20 23 29
+RPARAMC              : 8 15 32
+SELECT               : 14
+STRING               : 27
+TJOIN                : 33
+UNION                : 38
+error                : 
+
+Nonterminals, with rules where they appear
+
+arg                  : 7 8 29 29
+asign                : 3
+biexp                : 2 5 13
+binario              : 31
+campos               : 6 8 9
+cond_exp             : 21 21 22 22 23 24 24
+condicion            : 15 17 18 18 20 32
+exp                  : 0
+join_func            : 32
+op_binario           : 29
+op_condicion         : 19
+op_join_arg          : 30
+op_select            : 7
+op_select_opc        : 14
+unexp                : 1 4 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . exp
+    (1) exp -> . unexp
+    (2) exp -> . biexp
+    (3) exp -> . asign
+    (7) unexp -> . op_select PAREN arg RPARAM
+    (8) unexp -> . PROJECT PARENC campos RPARAMC PAREN arg RPARAM
+    (29) biexp -> . op_binario PAREN arg COMA arg RPARAM
+    (4) asign -> . ID IGUAL unexp
+    (5) asign -> . ID IGUAL biexp
+    (6) asign -> . ID IGUAL campos
+    (14) op_select -> . SELECT op_select_opc
+    (30) op_binario -> . op_join_arg
+    (31) op_binario -> . binario
+    (32) op_join_arg -> . join_func PARENC condicion RPARAMC
+    (37) binario -> . NJOIN
+    (38) binario -> . UNION
+    (39) binario -> . INTERSECT
+    (40) binario -> . EXCEPT
+    (33) join_func -> . TJOIN
+    (34) join_func -> . LJOIN
+    (35) join_func -> . RJOIN
+    (36) join_func -> . FJOIN
+
+    PROJECT         shift and go to state 14
+    ID              shift and go to state 16
+    SELECT          shift and go to state 5
+    NJOIN           shift and go to state 12
+    UNION           shift and go to state 13
+    INTERSECT       shift and go to state 15
+    EXCEPT          shift and go to state 10
+    TJOIN           shift and go to state 7
+    LJOIN           shift and go to state 4
+    RJOIN           shift and go to state 8
+    FJOIN           shift and go to state 6
+
+    op_join_arg                    shift and go to state 9
+    op_binario                     shift and go to state 1
+    join_func                      shift and go to state 17
+    binario                        shift and go to state 2
+    asign                          shift and go to state 18
+    biexp                          shift and go to state 3
+    exp                            shift and go to state 19
+    op_select                      shift and go to state 20
+    unexp                          shift and go to state 11
+
+state 1
+
+    (29) biexp -> op_binario . PAREN arg COMA arg RPARAM
+
+    PAREN           shift and go to state 21
+
+
+state 2
+
+    (31) op_binario -> binario .
+
+    PAREN           reduce using rule 31 (op_binario -> binario .)
+
+
+state 3
+
+    (2) exp -> biexp .
+
+    $end            reduce using rule 2 (exp -> biexp .)
+
+
+state 4
+
+    (34) join_func -> LJOIN .
+
+    PARENC          reduce using rule 34 (join_func -> LJOIN .)
+
+
+state 5
+
+    (14) op_select -> SELECT . op_select_opc
+    (15) op_select_opc -> . PARENC condicion RPARAMC
+    (16) op_select_opc -> .
+
+    PARENC          shift and go to state 22
+    PAREN           reduce using rule 16 (op_select_opc -> .)
+
+    op_select_opc                  shift and go to state 23
+
+state 6
+
+    (36) join_func -> FJOIN .
+
+    PARENC          reduce using rule 36 (join_func -> FJOIN .)
+
+
+state 7
+
+    (33) join_func -> TJOIN .
+
+    PARENC          reduce using rule 33 (join_func -> TJOIN .)
+
+
+state 8
+
+    (35) join_func -> RJOIN .
+
+    PARENC          reduce using rule 35 (join_func -> RJOIN .)
+
+
+state 9
+
+    (30) op_binario -> op_join_arg .
+
+    PAREN           reduce using rule 30 (op_binario -> op_join_arg .)
+
+
+state 10
+
+    (40) binario -> EXCEPT .
+
+    PAREN           reduce using rule 40 (binario -> EXCEPT .)
+
+
+state 11
+
+    (1) exp -> unexp .
+
+    $end            reduce using rule 1 (exp -> unexp .)
+
+
+state 12
+
+    (37) binario -> NJOIN .
+
+    PAREN           reduce using rule 37 (binario -> NJOIN .)
+
+
+state 13
+
+    (38) binario -> UNION .
+
+    PAREN           reduce using rule 38 (binario -> UNION .)
+
+
+state 14
+
+    (8) unexp -> PROJECT . PARENC campos RPARAMC PAREN arg RPARAM
+
+    PARENC          shift and go to state 24
+
+
+state 15
+
+    (39) binario -> INTERSECT .
+
+    PAREN           reduce using rule 39 (binario -> INTERSECT .)
+
+
+state 16
+
+    (4) asign -> ID . IGUAL unexp
+    (5) asign -> ID . IGUAL biexp
+    (6) asign -> ID . IGUAL campos
+
+    IGUAL           shift and go to state 25
+
+
+state 17
+
+    (32) op_join_arg -> join_func . PARENC condicion RPARAMC
+
+    PARENC          shift and go to state 26
+
+
+state 18
+
+    (3) exp -> asign .
+
+    $end            reduce using rule 3 (exp -> asign .)
+
+
+state 19
+
+    (0) S' -> exp .
+
+
+
+state 20
+
+    (7) unexp -> op_select . PAREN arg RPARAM
+
+    PAREN           shift and go to state 27
+
+
+state 21
+
+    (29) biexp -> op_binario PAREN . arg COMA arg RPARAM
+    (11) arg -> . ID
+    (12) arg -> . unexp
+    (13) arg -> . biexp
+    (7) unexp -> . op_select PAREN arg RPARAM
+    (8) unexp -> . PROJECT PARENC campos RPARAMC PAREN arg RPARAM
+    (29) biexp -> . op_binario PAREN arg COMA arg RPARAM
+    (14) op_select -> . SELECT op_select_opc
+    (30) op_binario -> . op_join_arg
+    (31) op_binario -> . binario
+    (32) op_join_arg -> . join_func PARENC condicion RPARAMC
+    (37) binario -> . NJOIN
+    (38) binario -> . UNION
+    (39) binario -> . INTERSECT
+    (40) binario -> . EXCEPT
+    (33) join_func -> . TJOIN
+    (34) join_func -> . LJOIN
+    (35) join_func -> . RJOIN
+    (36) join_func -> . FJOIN
+
+    ID              shift and go to state 31
+    PROJECT         shift and go to state 14
+    SELECT          shift and go to state 5
+    NJOIN           shift and go to state 12
+    UNION           shift and go to state 13
+    INTERSECT       shift and go to state 15
+    EXCEPT          shift and go to state 10
+    TJOIN           shift and go to state 7
+    LJOIN           shift and go to state 4
+    RJOIN           shift and go to state 8
+    FJOIN           shift and go to state 6
+
+    op_join_arg                    shift and go to state 9
+    op_binario                     shift and go to state 1
+    join_func                      shift and go to state 17
+    binario                        shift and go to state 2
+    biexp                          shift and go to state 28
+    arg                            shift and go to state 29
+    op_select                      shift and go to state 20
+    unexp                          shift and go to state 30
+
+state 22
+
+    (15) op_select_opc -> PARENC . condicion RPARAMC
+    (17) condicion -> . PAREN condicion RPARAM
+    (18) condicion -> . condicion OP_LOGICO condicion
+    (19) condicion -> . op_condicion
+    (20) condicion -> . OP_NOT PAREN condicion RPARAM
+    (21) op_condicion -> . cond_exp OP_COMPARACION cond_exp
+    (22) op_condicion -> . cond_exp IGUAL cond_exp
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 37
+    OP_NOT          shift and go to state 35
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 36
+    condicion                      shift and go to state 34
+    op_condicion                   shift and go to state 39
+
+state 23
+
+    (14) op_select -> SELECT op_select_opc .
+
+    PAREN           reduce using rule 14 (op_select -> SELECT op_select_opc .)
+
+
+state 24
+
+    (8) unexp -> PROJECT PARENC . campos RPARAMC PAREN arg RPARAM
+    (9) campos -> . ID COMA campos
+    (10) campos -> . ID
+
+    ID              shift and go to state 41
+
+    campos                         shift and go to state 40
+
+state 25
+
+    (4) asign -> ID IGUAL . unexp
+    (5) asign -> ID IGUAL . biexp
+    (6) asign -> ID IGUAL . campos
+    (7) unexp -> . op_select PAREN arg RPARAM
+    (8) unexp -> . PROJECT PARENC campos RPARAMC PAREN arg RPARAM
+    (29) biexp -> . op_binario PAREN arg COMA arg RPARAM
+    (9) campos -> . ID COMA campos
+    (10) campos -> . ID
+    (14) op_select -> . SELECT op_select_opc
+    (30) op_binario -> . op_join_arg
+    (31) op_binario -> . binario
+    (32) op_join_arg -> . join_func PARENC condicion RPARAMC
+    (37) binario -> . NJOIN
+    (38) binario -> . UNION
+    (39) binario -> . INTERSECT
+    (40) binario -> . EXCEPT
+    (33) join_func -> . TJOIN
+    (34) join_func -> . LJOIN
+    (35) join_func -> . RJOIN
+    (36) join_func -> . FJOIN
+
+    PROJECT         shift and go to state 14
+    ID              shift and go to state 41
+    SELECT          shift and go to state 5
+    NJOIN           shift and go to state 12
+    UNION           shift and go to state 13
+    INTERSECT       shift and go to state 15
+    EXCEPT          shift and go to state 10
+    TJOIN           shift and go to state 7
+    LJOIN           shift and go to state 4
+    RJOIN           shift and go to state 8
+    FJOIN           shift and go to state 6
+
+    op_join_arg                    shift and go to state 9
+    op_binario                     shift and go to state 1
+    join_func                      shift and go to state 17
+    binario                        shift and go to state 2
+    campos                         shift and go to state 44
+    biexp                          shift and go to state 42
+    op_select                      shift and go to state 20
+    unexp                          shift and go to state 43
+
+state 26
+
+    (32) op_join_arg -> join_func PARENC . condicion RPARAMC
+    (17) condicion -> . PAREN condicion RPARAM
+    (18) condicion -> . condicion OP_LOGICO condicion
+    (19) condicion -> . op_condicion
+    (20) condicion -> . OP_NOT PAREN condicion RPARAM
+    (21) op_condicion -> . cond_exp OP_COMPARACION cond_exp
+    (22) op_condicion -> . cond_exp IGUAL cond_exp
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 37
+    OP_NOT          shift and go to state 35
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 36
+    condicion                      shift and go to state 45
+    op_condicion                   shift and go to state 39
+
+state 27
+
+    (7) unexp -> op_select PAREN . arg RPARAM
+    (11) arg -> . ID
+    (12) arg -> . unexp
+    (13) arg -> . biexp
+    (7) unexp -> . op_select PAREN arg RPARAM
+    (8) unexp -> . PROJECT PARENC campos RPARAMC PAREN arg RPARAM
+    (29) biexp -> . op_binario PAREN arg COMA arg RPARAM
+    (14) op_select -> . SELECT op_select_opc
+    (30) op_binario -> . op_join_arg
+    (31) op_binario -> . binario
+    (32) op_join_arg -> . join_func PARENC condicion RPARAMC
+    (37) binario -> . NJOIN
+    (38) binario -> . UNION
+    (39) binario -> . INTERSECT
+    (40) binario -> . EXCEPT
+    (33) join_func -> . TJOIN
+    (34) join_func -> . LJOIN
+    (35) join_func -> . RJOIN
+    (36) join_func -> . FJOIN
+
+    ID              shift and go to state 31
+    PROJECT         shift and go to state 14
+    SELECT          shift and go to state 5
+    NJOIN           shift and go to state 12
+    UNION           shift and go to state 13
+    INTERSECT       shift and go to state 15
+    EXCEPT          shift and go to state 10
+    TJOIN           shift and go to state 7
+    LJOIN           shift and go to state 4
+    RJOIN           shift and go to state 8
+    FJOIN           shift and go to state 6
+
+    op_join_arg                    shift and go to state 9
+    op_binario                     shift and go to state 1
+    join_func                      shift and go to state 17
+    binario                        shift and go to state 2
+    biexp                          shift and go to state 28
+    arg                            shift and go to state 46
+    op_select                      shift and go to state 20
+    unexp                          shift and go to state 30
+
+state 28
+
+    (13) arg -> biexp .
+
+    RPARAM          reduce using rule 13 (arg -> biexp .)
+    COMA            reduce using rule 13 (arg -> biexp .)
+
+
+state 29
+
+    (29) biexp -> op_binario PAREN arg . COMA arg RPARAM
+
+    COMA            shift and go to state 47
+
+
+state 30
+
+    (12) arg -> unexp .
+
+    RPARAM          reduce using rule 12 (arg -> unexp .)
+    COMA            reduce using rule 12 (arg -> unexp .)
+
+
+state 31
+
+    (11) arg -> ID .
+
+    RPARAM          reduce using rule 11 (arg -> ID .)
+    COMA            reduce using rule 11 (arg -> ID .)
+
+
+state 32
+
+    (27) cond_exp -> STRING .
+
+    OP_COMPARACION  reduce using rule 27 (cond_exp -> STRING .)
+    IGUAL           reduce using rule 27 (cond_exp -> STRING .)
+    OP_ARITMETICO   reduce using rule 27 (cond_exp -> STRING .)
+    RPARAM          reduce using rule 27 (cond_exp -> STRING .)
+    RPARAMC         reduce using rule 27 (cond_exp -> STRING .)
+    OP_LOGICO       reduce using rule 27 (cond_exp -> STRING .)
+
+
+state 33
+
+    (26) cond_exp -> NUM .
+
+    OP_COMPARACION  reduce using rule 26 (cond_exp -> NUM .)
+    IGUAL           reduce using rule 26 (cond_exp -> NUM .)
+    OP_ARITMETICO   reduce using rule 26 (cond_exp -> NUM .)
+    RPARAM          reduce using rule 26 (cond_exp -> NUM .)
+    RPARAMC         reduce using rule 26 (cond_exp -> NUM .)
+    OP_LOGICO       reduce using rule 26 (cond_exp -> NUM .)
+
+
+state 34
+
+    (15) op_select_opc -> PARENC condicion . RPARAMC
+    (18) condicion -> condicion . OP_LOGICO condicion
+
+    RPARAMC         shift and go to state 49
+    OP_LOGICO       shift and go to state 48
+
+
+state 35
+
+    (20) condicion -> OP_NOT . PAREN condicion RPARAM
+
+    PAREN           shift and go to state 50
+
+
+state 36
+
+    (21) op_condicion -> cond_exp . OP_COMPARACION cond_exp
+    (22) op_condicion -> cond_exp . IGUAL cond_exp
+    (24) cond_exp -> cond_exp . OP_ARITMETICO cond_exp
+
+    OP_COMPARACION  shift and go to state 52
+    IGUAL           shift and go to state 53
+    OP_ARITMETICO   shift and go to state 51
+
+
+state 37
+
+    (17) condicion -> PAREN . condicion RPARAM
+    (23) cond_exp -> PAREN . cond_exp RPARAM
+    (17) condicion -> . PAREN condicion RPARAM
+    (18) condicion -> . condicion OP_LOGICO condicion
+    (19) condicion -> . op_condicion
+    (20) condicion -> . OP_NOT PAREN condicion RPARAM
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+    (21) op_condicion -> . cond_exp OP_COMPARACION cond_exp
+    (22) op_condicion -> . cond_exp IGUAL cond_exp
+
+    PAREN           shift and go to state 37
+    OP_NOT          shift and go to state 35
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 55
+    condicion                      shift and go to state 54
+    op_condicion                   shift and go to state 39
+
+state 38
+
+    (25) cond_exp -> ID .
+    (28) cond_exp -> ID . PUNTO ID
+
+    OP_COMPARACION  reduce using rule 25 (cond_exp -> ID .)
+    IGUAL           reduce using rule 25 (cond_exp -> ID .)
+    OP_ARITMETICO   reduce using rule 25 (cond_exp -> ID .)
+    RPARAM          reduce using rule 25 (cond_exp -> ID .)
+    RPARAMC         reduce using rule 25 (cond_exp -> ID .)
+    OP_LOGICO       reduce using rule 25 (cond_exp -> ID .)
+    PUNTO           shift and go to state 56
+
+
+state 39
+
+    (19) condicion -> op_condicion .
+
+    OP_LOGICO       reduce using rule 19 (condicion -> op_condicion .)
+    RPARAMC         reduce using rule 19 (condicion -> op_condicion .)
+    RPARAM          reduce using rule 19 (condicion -> op_condicion .)
+
+
+state 40
+
+    (8) unexp -> PROJECT PARENC campos . RPARAMC PAREN arg RPARAM
+
+    RPARAMC         shift and go to state 57
+
+
+state 41
+
+    (9) campos -> ID . COMA campos
+    (10) campos -> ID .
+
+    COMA            shift and go to state 58
+    RPARAMC         reduce using rule 10 (campos -> ID .)
+    $end            reduce using rule 10 (campos -> ID .)
+
+
+state 42
+
+    (5) asign -> ID IGUAL biexp .
+
+    $end            reduce using rule 5 (asign -> ID IGUAL biexp .)
+
+
+state 43
+
+    (4) asign -> ID IGUAL unexp .
+
+    $end            reduce using rule 4 (asign -> ID IGUAL unexp .)
+
+
+state 44
+
+    (6) asign -> ID IGUAL campos .
+
+    $end            reduce using rule 6 (asign -> ID IGUAL campos .)
+
+
+state 45
+
+    (32) op_join_arg -> join_func PARENC condicion . RPARAMC
+    (18) condicion -> condicion . OP_LOGICO condicion
+
+    RPARAMC         shift and go to state 59
+    OP_LOGICO       shift and go to state 48
+
+
+state 46
+
+    (7) unexp -> op_select PAREN arg . RPARAM
+
+    RPARAM          shift and go to state 60
+
+
+state 47
+
+    (29) biexp -> op_binario PAREN arg COMA . arg RPARAM
+    (11) arg -> . ID
+    (12) arg -> . unexp
+    (13) arg -> . biexp
+    (7) unexp -> . op_select PAREN arg RPARAM
+    (8) unexp -> . PROJECT PARENC campos RPARAMC PAREN arg RPARAM
+    (29) biexp -> . op_binario PAREN arg COMA arg RPARAM
+    (14) op_select -> . SELECT op_select_opc
+    (30) op_binario -> . op_join_arg
+    (31) op_binario -> . binario
+    (32) op_join_arg -> . join_func PARENC condicion RPARAMC
+    (37) binario -> . NJOIN
+    (38) binario -> . UNION
+    (39) binario -> . INTERSECT
+    (40) binario -> . EXCEPT
+    (33) join_func -> . TJOIN
+    (34) join_func -> . LJOIN
+    (35) join_func -> . RJOIN
+    (36) join_func -> . FJOIN
+
+    ID              shift and go to state 31
+    PROJECT         shift and go to state 14
+    SELECT          shift and go to state 5
+    NJOIN           shift and go to state 12
+    UNION           shift and go to state 13
+    INTERSECT       shift and go to state 15
+    EXCEPT          shift and go to state 10
+    TJOIN           shift and go to state 7
+    LJOIN           shift and go to state 4
+    RJOIN           shift and go to state 8
+    FJOIN           shift and go to state 6
+
+    op_join_arg                    shift and go to state 9
+    op_binario                     shift and go to state 1
+    join_func                      shift and go to state 17
+    binario                        shift and go to state 2
+    biexp                          shift and go to state 28
+    arg                            shift and go to state 61
+    op_select                      shift and go to state 20
+    unexp                          shift and go to state 30
+
+state 48
+
+    (18) condicion -> condicion OP_LOGICO . condicion
+    (17) condicion -> . PAREN condicion RPARAM
+    (18) condicion -> . condicion OP_LOGICO condicion
+    (19) condicion -> . op_condicion
+    (20) condicion -> . OP_NOT PAREN condicion RPARAM
+    (21) op_condicion -> . cond_exp OP_COMPARACION cond_exp
+    (22) op_condicion -> . cond_exp IGUAL cond_exp
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 37
+    OP_NOT          shift and go to state 35
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 36
+    condicion                      shift and go to state 62
+    op_condicion                   shift and go to state 39
+
+state 49
+
+    (15) op_select_opc -> PARENC condicion RPARAMC .
+
+    PAREN           reduce using rule 15 (op_select_opc -> PARENC condicion RPARAMC .)
+
+
+state 50
+
+    (20) condicion -> OP_NOT PAREN . condicion RPARAM
+    (17) condicion -> . PAREN condicion RPARAM
+    (18) condicion -> . condicion OP_LOGICO condicion
+    (19) condicion -> . op_condicion
+    (20) condicion -> . OP_NOT PAREN condicion RPARAM
+    (21) op_condicion -> . cond_exp OP_COMPARACION cond_exp
+    (22) op_condicion -> . cond_exp IGUAL cond_exp
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 37
+    OP_NOT          shift and go to state 35
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 36
+    condicion                      shift and go to state 63
+    op_condicion                   shift and go to state 39
+
+state 51
+
+    (24) cond_exp -> cond_exp OP_ARITMETICO . cond_exp
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 65
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 64
+
+state 52
+
+    (21) op_condicion -> cond_exp OP_COMPARACION . cond_exp
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 65
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 66
+
+state 53
+
+    (22) op_condicion -> cond_exp IGUAL . cond_exp
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 65
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 67
+
+state 54
+
+    (17) condicion -> PAREN condicion . RPARAM
+    (18) condicion -> condicion . OP_LOGICO condicion
+
+    RPARAM          shift and go to state 68
+    OP_LOGICO       shift and go to state 48
+
+
+state 55
+
+    (23) cond_exp -> PAREN cond_exp . RPARAM
+    (24) cond_exp -> cond_exp . OP_ARITMETICO cond_exp
+    (21) op_condicion -> cond_exp . OP_COMPARACION cond_exp
+    (22) op_condicion -> cond_exp . IGUAL cond_exp
+
+    RPARAM          shift and go to state 69
+    OP_ARITMETICO   shift and go to state 51
+    OP_COMPARACION  shift and go to state 52
+    IGUAL           shift and go to state 53
+
+
+state 56
+
+    (28) cond_exp -> ID PUNTO . ID
+
+    ID              shift and go to state 70
+
+
+state 57
+
+    (8) unexp -> PROJECT PARENC campos RPARAMC . PAREN arg RPARAM
+
+    PAREN           shift and go to state 71
+
+
+state 58
+
+    (9) campos -> ID COMA . campos
+    (9) campos -> . ID COMA campos
+    (10) campos -> . ID
+
+    ID              shift and go to state 41
+
+    campos                         shift and go to state 72
+
+state 59
+
+    (32) op_join_arg -> join_func PARENC condicion RPARAMC .
+
+    PAREN           reduce using rule 32 (op_join_arg -> join_func PARENC condicion RPARAMC .)
+
+
+state 60
+
+    (7) unexp -> op_select PAREN arg RPARAM .
+
+    RPARAM          reduce using rule 7 (unexp -> op_select PAREN arg RPARAM .)
+    COMA            reduce using rule 7 (unexp -> op_select PAREN arg RPARAM .)
+    $end            reduce using rule 7 (unexp -> op_select PAREN arg RPARAM .)
+
+
+state 61
+
+    (29) biexp -> op_binario PAREN arg COMA arg . RPARAM
+
+    RPARAM          shift and go to state 73
+
+
+state 62
+
+    (18) condicion -> condicion OP_LOGICO condicion .
+    (18) condicion -> condicion . OP_LOGICO condicion
+
+    OP_LOGICO       reduce using rule 18 (condicion -> condicion OP_LOGICO condicion .)
+    RPARAMC         reduce using rule 18 (condicion -> condicion OP_LOGICO condicion .)
+    RPARAM          reduce using rule 18 (condicion -> condicion OP_LOGICO condicion .)
+
+  ! OP_LOGICO       [ shift and go to state 48 ]
+
+
+state 63
+
+    (20) condicion -> OP_NOT PAREN condicion . RPARAM
+    (18) condicion -> condicion . OP_LOGICO condicion
+
+    RPARAM          shift and go to state 74
+    OP_LOGICO       shift and go to state 48
+
+
+state 64
+
+    (24) cond_exp -> cond_exp OP_ARITMETICO cond_exp .
+    (24) cond_exp -> cond_exp . OP_ARITMETICO cond_exp
+
+    OP_COMPARACION  reduce using rule 24 (cond_exp -> cond_exp OP_ARITMETICO cond_exp .)
+    IGUAL           reduce using rule 24 (cond_exp -> cond_exp OP_ARITMETICO cond_exp .)
+    OP_ARITMETICO   reduce using rule 24 (cond_exp -> cond_exp OP_ARITMETICO cond_exp .)
+    RPARAM          reduce using rule 24 (cond_exp -> cond_exp OP_ARITMETICO cond_exp .)
+    RPARAMC         reduce using rule 24 (cond_exp -> cond_exp OP_ARITMETICO cond_exp .)
+    OP_LOGICO       reduce using rule 24 (cond_exp -> cond_exp OP_ARITMETICO cond_exp .)
+
+  ! OP_ARITMETICO   [ shift and go to state 51 ]
+
+
+state 65
+
+    (23) cond_exp -> PAREN . cond_exp RPARAM
+    (23) cond_exp -> . PAREN cond_exp RPARAM
+    (24) cond_exp -> . cond_exp OP_ARITMETICO cond_exp
+    (25) cond_exp -> . ID
+    (26) cond_exp -> . NUM
+    (27) cond_exp -> . STRING
+    (28) cond_exp -> . ID PUNTO ID
+
+    PAREN           shift and go to state 65
+    ID              shift and go to state 38
+    NUM             shift and go to state 33
+    STRING          shift and go to state 32
+
+    cond_exp                       shift and go to state 75
+
+state 66
+
+    (21) op_condicion -> cond_exp OP_COMPARACION cond_exp .
+    (24) cond_exp -> cond_exp . OP_ARITMETICO cond_exp
+
+    RPARAM          reduce using rule 21 (op_condicion -> cond_exp OP_COMPARACION cond_exp .)
+    OP_LOGICO       reduce using rule 21 (op_condicion -> cond_exp OP_COMPARACION cond_exp .)
+    RPARAMC         reduce using rule 21 (op_condicion -> cond_exp OP_COMPARACION cond_exp .)
+    OP_ARITMETICO   shift and go to state 51
+
+
+state 67
+
+    (22) op_condicion -> cond_exp IGUAL cond_exp .
+    (24) cond_exp -> cond_exp . OP_ARITMETICO cond_exp
+
+    RPARAM          reduce using rule 22 (op_condicion -> cond_exp IGUAL cond_exp .)
+    OP_LOGICO       reduce using rule 22 (op_condicion -> cond_exp IGUAL cond_exp .)
+    RPARAMC         reduce using rule 22 (op_condicion -> cond_exp IGUAL cond_exp .)
+    OP_ARITMETICO   shift and go to state 51
+
+
+state 68
+
+    (17) condicion -> PAREN condicion RPARAM .
+
+    OP_LOGICO       reduce using rule 17 (condicion -> PAREN condicion RPARAM .)
+    RPARAMC         reduce using rule 17 (condicion -> PAREN condicion RPARAM .)
+    RPARAM          reduce using rule 17 (condicion -> PAREN condicion RPARAM .)
+
+
+state 69
+
+    (23) cond_exp -> PAREN cond_exp RPARAM .
+
+    OP_COMPARACION  reduce using rule 23 (cond_exp -> PAREN cond_exp RPARAM .)
+    IGUAL           reduce using rule 23 (cond_exp -> PAREN cond_exp RPARAM .)
+    OP_ARITMETICO   reduce using rule 23 (cond_exp -> PAREN cond_exp RPARAM .)
+    RPARAM          reduce using rule 23 (cond_exp -> PAREN cond_exp RPARAM .)
+    RPARAMC         reduce using rule 23 (cond_exp -> PAREN cond_exp RPARAM .)
+    OP_LOGICO       reduce using rule 23 (cond_exp -> PAREN cond_exp RPARAM .)
+
+
+state 70
+
+    (28) cond_exp -> ID PUNTO ID .
+
+    OP_COMPARACION  reduce using rule 28 (cond_exp -> ID PUNTO ID .)
+    IGUAL           reduce using rule 28 (cond_exp -> ID PUNTO ID .)
+    OP_ARITMETICO   reduce using rule 28 (cond_exp -> ID PUNTO ID .)
+    RPARAM          reduce using rule 28 (cond_exp -> ID PUNTO ID .)
+    RPARAMC         reduce using rule 28 (cond_exp -> ID PUNTO ID .)
+    OP_LOGICO       reduce using rule 28 (cond_exp -> ID PUNTO ID .)
+
+
+state 71
+
+    (8) unexp -> PROJECT PARENC campos RPARAMC PAREN . arg RPARAM
+    (11) arg -> . ID
+    (12) arg -> . unexp
+    (13) arg -> . biexp
+    (7) unexp -> . op_select PAREN arg RPARAM
+    (8) unexp -> . PROJECT PARENC campos RPARAMC PAREN arg RPARAM
+    (29) biexp -> . op_binario PAREN arg COMA arg RPARAM
+    (14) op_select -> . SELECT op_select_opc
+    (30) op_binario -> . op_join_arg
+    (31) op_binario -> . binario
+    (32) op_join_arg -> . join_func PARENC condicion RPARAMC
+    (37) binario -> . NJOIN
+    (38) binario -> . UNION
+    (39) binario -> . INTERSECT
+    (40) binario -> . EXCEPT
+    (33) join_func -> . TJOIN
+    (34) join_func -> . LJOIN
+    (35) join_func -> . RJOIN
+    (36) join_func -> . FJOIN
+
+    ID              shift and go to state 31
+    PROJECT         shift and go to state 14
+    SELECT          shift and go to state 5
+    NJOIN           shift and go to state 12
+    UNION           shift and go to state 13
+    INTERSECT       shift and go to state 15
+    EXCEPT          shift and go to state 10
+    TJOIN           shift and go to state 7
+    LJOIN           shift and go to state 4
+    RJOIN           shift and go to state 8
+    FJOIN           shift and go to state 6
+
+    op_join_arg                    shift and go to state 9
+    op_binario                     shift and go to state 1
+    join_func                      shift and go to state 17
+    binario                        shift and go to state 2
+    biexp                          shift and go to state 28
+    arg                            shift and go to state 76
+    op_select                      shift and go to state 20
+    unexp                          shift and go to state 30
+
+state 72
+
+    (9) campos -> ID COMA campos .
+
+    RPARAMC         reduce using rule 9 (campos -> ID COMA campos .)
+    $end            reduce using rule 9 (campos -> ID COMA campos .)
+
+
+state 73
+
+    (29) biexp -> op_binario PAREN arg COMA arg RPARAM .
+
+    COMA            reduce using rule 29 (biexp -> op_binario PAREN arg COMA arg RPARAM .)
+    RPARAM          reduce using rule 29 (biexp -> op_binario PAREN arg COMA arg RPARAM .)
+    $end            reduce using rule 29 (biexp -> op_binario PAREN arg COMA arg RPARAM .)
+
+
+state 74
+
+    (20) condicion -> OP_NOT PAREN condicion RPARAM .
+
+    OP_LOGICO       reduce using rule 20 (condicion -> OP_NOT PAREN condicion RPARAM .)
+    RPARAMC         reduce using rule 20 (condicion -> OP_NOT PAREN condicion RPARAM .)
+    RPARAM          reduce using rule 20 (condicion -> OP_NOT PAREN condicion RPARAM .)
+
+
+state 75
+
+    (23) cond_exp -> PAREN cond_exp . RPARAM
+    (24) cond_exp -> cond_exp . OP_ARITMETICO cond_exp
+
+    RPARAM          shift and go to state 69
+    OP_ARITMETICO   shift and go to state 51
+
+
+state 76
+
+    (8) unexp -> PROJECT PARENC campos RPARAMC PAREN arg . RPARAM
+
+    RPARAM          shift and go to state 77
+
+
+state 77
+
+    (8) unexp -> PROJECT PARENC campos RPARAMC PAREN arg RPARAM .
+
+    RPARAM          reduce using rule 8 (unexp -> PROJECT PARENC campos RPARAMC PAREN arg RPARAM .)
+    COMA            reduce using rule 8 (unexp -> PROJECT PARENC campos RPARAMC PAREN arg RPARAM .)
+    $end            reduce using rule 8 (unexp -> PROJECT PARENC campos RPARAMC PAREN arg RPARAM .)
+

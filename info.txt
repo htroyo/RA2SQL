@@ -1,0 +1,8 @@
+Sobre el ra2sql:
+para llamarlo:
+python ra2sql.py [archivo1] [archivo2]
+si no se pasan argumentos lee consultas desde stdin y al dejar una linea en blanco
+devuelve en stdout el resultado de las consultas validas
+si se pasa un archivo lee del archiovo de entrada y guarda el resultado en un archivo con extension sql
+(mismo nombre)
+si se pasan dos argumentos lee archivo1 y guarda en archivo2 el resultado
